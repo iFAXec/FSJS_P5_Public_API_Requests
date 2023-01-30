@@ -37,10 +37,16 @@ fetch('https://randomuser.me/api/?results=12')
     }
 
 
-const employeeCard = document.getElementsByClassName("card");
-//console.log(employeeCard);
+document.addEventListener("click", (e)=>{
+    const target = e.target.closest(".card");    
+    //console.log(target);
+    if(target){
+        console.log(generateModal());        
+    }
+})
 
-
+const body = document.getElementsByTagName("body");
+//console.log(body);
 
     function generateModal(para) {
         const img = para.picture.large;
@@ -53,28 +59,31 @@ const employeeCard = document.getElementsByClassName("card");
 
 
         const htmlModal = `
-        <class="modal-container">        
+        <div class="modal-container">        
         <div class="modal">
         <button type="button" id="modal-close-btn" class="modal-close-btn"><strong>X</strong></button>
         <div class="modal-info-container">
-        <img class="modal-img" src=${img} alt= profile picture of ${name.first}>
-        <h3 id="name" class="modal-name cap">${name}</h3>
-        <p class="modal-text">${email}</p>
-        <p class="modal-text cap">${city}</p>
-        <hr>
-        <p class="modal-text">${cell}</p>
-        <p class="modal-text">${location}</p>
-        <p class="modal-text">Birthday: ${birthday}</p>        
+            <img class="modal-img" src=${img} alt= profile picture of ${name.first}>
+            <h3 id="name" class="modal-name cap">${name}</h3>
+            <p class="modal-text">${email}</p>
+            <p class="modal-text cap">${city}</p>
+            <hr>
+            <p class="modal-text">${cell}</p>
+            <p class="modal-text">${location}</p>
+            <p class="modal-text">Birthday: ${birthday}</p>        
         </div>       
         </div>
         </div>        
         `   
-        modalDiv.insertAdjacentHTML("beforeend", htmlModal);     
-
+        body.insertAdjacentHTML("beforeend", htmlModal);
+        const modal = document.getElementsByClassName("modal-container");
+        modal.style.display = "block"
     }
-    const modalDiv = document.getElementsByClassName("modal-container");
-    console.log(modalDiv);
-    console.log(generateModal(data));
+
+    
+    
+    
+    
 
 
 
