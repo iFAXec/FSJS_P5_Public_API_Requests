@@ -1,4 +1,6 @@
-const url = "https://randomuser.me/api/?results=12&inc=picture,name,email,location,cell,dob"
+const url = "https://randomuser.me/api/?results=12&inc=picture,name,email,location,cell,dob";
+const galleryDiv = document.getElementById("gallery");
+let employees = [];
 
 
 
@@ -6,7 +8,8 @@ fetch(url)
     .then(response => response.json())
     //.then(result => console.log(result))        
     .then(data => {
-        data.results.map((item, index) => generateHTML(item, index))
+        employees = data.results;
+        employees.map((item, index) => generateHTML(item, index));
     })    
     //.catch(error => console.error("Error:", error))
 
@@ -21,7 +24,7 @@ fetch(url)
             const city = item.location.city;
             const state = item.location.state;            
 
-            const galleryDiv = document.getElementById("gallery"); 
+             
 
             const html = `
             <div class="card" data-index=${index}> 
@@ -43,47 +46,41 @@ fetch(url)
 
 document.addEventListener("click", (e)=>{
     const target = e.target.closest(".card");
-    const index = target.getAttribute("data-index");
-    console.log(index);   
-
-    
-    console.log(generateModal(index));        
+    const index = target.getAttribute("data-index");  
+    employee = employees[index];
+    console.log(employee); 
     
 })
 
-const body = document.getElementsByTagName("body");
-//console.log(body);
-
-    function generateModal(para) {
-        const img = para.picture.large;
-        const name = para.name;
-        const email = para.email;
-        const city = para.location.city;
-        const cell = para.cell;
-        const location = para.location;
-        const birthday = para.dob;
-
-
+    function emptyModal() {       
         const htmlModal = `
-        <div class="modal-container">        
-        <div class="modal">
-        <button type="button" id="modal-close-btn" class="modal-close-btn"><strong>X</strong></button>
-        <div class="modal-info-container">
-            <img class="modal-img" src=${img} alt= profile picture of ${name.first}>
-            <h3 id="name" class="modal-name cap">${name}</h3>
-            <p class="modal-text">${email}</p>
-            <p class="modal-text cap">${city}</p>
-            <hr>
-            <p class="modal-text">${cell}</p>
-            <p class="modal-text">${location}</p>
-            <p class="modal-text">Birthday: ${birthday}</p>        
-        </div>       
-        </div>
-        </div>        
-        `   
-        body.insertAdjacentHTML("beforeend", htmlModal);
-        const modal = document.getElementsByClassName("modal-container");
-        modal.style.display = "block"
+        <div class="modal-container data-index="" style = "display:none">
+                <div class="modal">
+                    <button type="button" id="modal-close-btn" class="modal-close-btn"><strong>X</strong></button>
+                    <div class="modal-info-container">
+                        <img class="modal-img" src="" alt="profile picture">
+                        <h3 id="name" class="modal-name cap"></h3>
+                        <p class="modal-text"></p>
+                        <p class="modal-text cap"></p>
+                        <hr>
+                        <p class="modal-text"></p>
+                        <p class="modal-text"></p>
+                        <p class="modal-text"></p>
+                    </div>
+                </div>
+                
+                <div class="modal-btn-container">
+                    <button type="button" id="modal-prev" class="modal-prev btn">Prev</button>
+                    <button type="button" id="modal-next" class="modal-next btn">Next</button>
+                </div>
+            </div>
+        `       
+        galleryDiv.insertAdjacentHTML("afterend", htmlModal);
+    }
+
+    function generateModal() {
+        
+        
     }
 
     
