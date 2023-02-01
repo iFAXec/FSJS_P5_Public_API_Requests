@@ -42,16 +42,6 @@ fetch(url)
             //console.log(html);
             galleryDiv.insertAdjacentHTML("beforeend", html);        
     }
-
-
-document.addEventListener("click", (e)=>{
-    const target = e.target.closest(".card");
-    const index = target.getAttribute("data-index");  
-    employee = employees[index];
-    console.log(employee); 
-    
-})
-
     function emptyModal() {       
         const htmlModal = `
         <div class="modal-container data-index="" style = "display:none">
@@ -78,10 +68,40 @@ document.addEventListener("click", (e)=>{
         galleryDiv.insertAdjacentHTML("afterend", htmlModal);
     }
 
-    function generateModal() {
+    function updateModal(employee, index) {
+        const modalContainer = document.querySelector(".modal-container");       
+        modalContainer.setAttribute("data-index", employee.index);
+
+        const image = modalContainer.querySelector(".modal-img");        
+        image.src = employee.picture.large;
+        image.alt = "profile picture";
+
+        const name = document.querySelector("#name");
+        name.textContent = employee.name;
+
+        const email = modalContainer.querySelector(".modal-text");
+        email = employee.email
+
+        const cap = modalContainer.querySelector(".cap");
+        cap = employee.city;
         
+        modalContainer.style.display = block;        
         
     }
+
+updateModal();
+
+
+
+document.addEventListener("click", (e)=>{
+        const target = e.target.closest(".card");
+        const index = target.getAttribute("data-index");  
+        console.log(index);
+        employee = employees[index];
+        console.log(employee);     
+        updateModal(employee);
+        
+    })  
 
     
     
