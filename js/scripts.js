@@ -1,8 +1,12 @@
-fetch('https://randomuser.me/api/?results=12')
+const url = "https://randomuser.me/api/?results=12&inc=picture,name,email,location,cell,dob"
+
+
+
+fetch(url)
     .then(response => response.json())
     //.then(result => console.log(result))        
     .then(data => {
-        data.results.map(item => generateHTML(item))
+        data.results.map((item, index) => generateHTML(item, index))
     })    
     //.catch(error => console.error("Error:", error))
 
@@ -10,7 +14,7 @@ fetch('https://randomuser.me/api/?results=12')
 
 
     //Helper function which generate html within the card
-    function generateHTML(item) {
+    function generateHTML(item, index) {
             const img = item.picture.large;
             const name = item.name;
             const email = item.email;
@@ -20,7 +24,7 @@ fetch('https://randomuser.me/api/?results=12')
             const galleryDiv = document.getElementById("gallery"); 
 
             const html = `
-            <div class="card"> 
+            <div class="card" data-index=${index}> 
             <div class="card-img-container">
                 <img class="card-img" src= ${img} alt = profile picture of ${name.first} ${name.last}>
             </div>
@@ -30,7 +34,7 @@ fetch('https://randomuser.me/api/?results=12')
                 <p class="card-text cap">${city}, ${state}</p>                
             </div>    
             </div>
-            `
+            `            
             //console.log(galleryDiv);
             //console.log(html);
             galleryDiv.insertAdjacentHTML("beforeend", html);        
@@ -38,11 +42,13 @@ fetch('https://randomuser.me/api/?results=12')
 
 
 document.addEventListener("click", (e)=>{
-    const target = e.target.closest(".card");    
-    //console.log(target);
-    if(target){
-        console.log(generateModal());        
-    }
+    const target = e.target.closest(".card");
+    const index = target.getAttribute("data-index");
+    console.log(index);   
+
+    
+    console.log(generateModal(index));        
+    
 })
 
 const body = document.getElementsByTagName("body");
