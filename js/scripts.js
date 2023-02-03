@@ -68,24 +68,13 @@ fetch(url)
         galleryDiv.insertAdjacentHTML("afterend", htmlModal);
     }
 
-    function updateModal(employee, index) {
-        const modalContainer = document.querySelector(".modal-container");       
-        modalContainer.setAttribute("data-index", employee.index);
 
-        const image = modalContainer.querySelector(".modal-img");        
-        image.src = employee.picture.large;
-        image.alt = "profile picture";
+    function updateModal(index) {
 
-        const name = document.querySelector("#name");
-        name.textContent = employee.name;
+        //const {name: {first, last}, cell, email, dob: {date}, location:{street, city, state,country, postcode}, picture  } = employees[index];
 
-        const email = modalContainer.querySelector(".modal-text");
-        email = employee.email
-
-        const cap = modalContainer.querySelector(".cap");
-        cap = employee.city;
-        
-        modalContainer.style.display = block;        
+        let birthday = new Date(dob);
+        birthday.toLocaleDateString("en-GB");         
         
     }
 
