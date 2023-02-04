@@ -90,9 +90,9 @@ function generateModal (){
     modalImg.src = employee.picture.large;
     modalImg.alt = `Profile picture of ${employee.name.first} ${employee.name.last}`;    
     modalName.textContent = `${employee.name.first} ${employee.name.last}`;
-    modalEmail.textContent = `${employee.email}`;
-    modalCity.textContent = `${employee.location.city}`;
-    modalCell.textContent = `${employee.cell}`;
+    modalEmail.textContent = employee.email;
+    modalCity.textContent = employee.location.city;
+    modalCell.textContent = employee.cell;
     modalAdress.textContent = `${employee.location.street.number} ${employee.location.street.name}, ${employee.location.state}, ${employee.location.postcode}`;
     modalBirthday.textContent = `Birthday: ${employee.dob.date}`;
 
