@@ -50,18 +50,18 @@ fetch(url)
 
     function createModal() {
         const htmlModal = `
-             <div class="modal-container data-index="" style="display=none">
+             <div class="modal-container data-index="" style= "display=none">
                 <div class="modal">
                     <button type="button" id="modal-close-btn" class="modal-close-btn"><strong>X</strong></button>
                     <div class="modal-info-container">
-                        <img class="modal-img" src="" alt="profile picture">
-                        <h3 id="name" class="modal-name cap"></h3>
-                        <p class="modal-text"></p>
-                        <p class="modal-text cap"></p>
+                        <img id = "img" class="modal-img" src="" alt="profile picture">
+                        <h3 id = "name" class="modal-name cap"></h3>
+                        <p id = "email" class="modal-text"></p>
+                        <p id = "city" class="modal-text cap"></p>
                         <hr>
-                        <p class="modal-text"></p>
-                        <p class="modal-text"></p>
-                        <p class="modal-text"></p>
+                        <p id ="cell" class="modal-text"></p>
+                        <p id ="address" class="modal-text"></p>
+                        <p id = "dob" class="modal-text"></p>
                     </div>
                 </div>
                 
@@ -82,34 +82,30 @@ function generateModal (){
     const modalEmail = document.querySelector(".modal-text");         
     const modalCity = document.querySelectorAll(".modal-text.cap")[0];
     const modalCell = document.querySelectorAll(".modal-text")[2];  
-    const modalAdress = document.querySelectorAll(".modal-text")[3];  
-    const modalBirthday = document.querySelectorAll(".modal-text")[4];        
-    console.log(modalBirthday);
+    const modalAdress = document.querySelectorAll(".modal-text")[3];
+    const modalBirthday = document.querySelectorAll(".modal-text")[4]; 
     
+    //Convert the cell number in (XXX) XXX-XXXX format 
+    const empoyeeCell = employee.cell;
+    const number = empoyeeCell.replace(/\D/g, '');
+    const match = number.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');
+    
+    //convert the date to dd/mm/yyyy format
+    const employeeDoB = employee.dob.date; // get the date of dob from the object    
+    const date = new Date(employeeDoB);     
+    const Birthday = date.toLocaleDateString("en-GB"); 
+    //console.log(Birthday);
 
     modalImg.src = employee.picture.large;
     modalImg.alt = `Profile picture of ${employee.name.first} ${employee.name.last}`;    
-    modalName.textContent = `${employee.name.first} ${employee.name.last}`;
-    modalEmail.textContent = employee.email;
-    modalCity.textContent = employee.location.city;
-    modalCell.textContent = employee.cell;
-    modalAdress.textContent = `${employee.location.street.number} ${employee.location.street.name}, ${employee.location.state}, ${employee.location.postcode}`;
-    modalBirthday.textContent = `Birthday: ${employee.dob.date}`;
-
-    
-
+    modalName.innerHTML = `${employee.name.first} ${employee.name.last}`;
+    modalEmail.innerHTML= employee.email;
+    modalCity.innerHTML = employee.location.city;
+    modalCell.innerHTML = match;
+    modalAdress.innerHTML = `${employee.location.street.number} ${employee.location.street.name}, ${employee.location.state}, ${employee.location.postcode}`;
+    modalBirthday.textContent = "Birthday:" + Birthday; //textContent and innerHTML can also be used to update text within the tags
 
 }
-
-
-
-
-
-
-
-
-
-
 
 const modalContainer = document.querySelector(".modal-container");
 const closeModal = document.getElementById("modal-close-btn");
