@@ -50,7 +50,7 @@ fetch(url)
 
     function createModal() {
         const htmlModal = `
-             <div class="modal-container data-index="" style= "display=none">
+             <div class="modal-container data-index="" style = "display:none">
                 <div class="modal">
                     <button type="button" id="modal-close-btn" class="modal-close-btn"><strong>X</strong></button>
                     <div class="modal-info-container">
