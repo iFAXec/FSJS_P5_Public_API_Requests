@@ -122,13 +122,47 @@ const closeModal = document.getElementById("modal-close-btn");
 
 
 
+function changeModal(index){
+    const {picture: {large}, name: {first, last}, email, cell, dob: {date}, location: {city, state, country, postcode}} = employees[index];
+    modalContainer.setAttribute("data-index", index);
+
+    document.getElementById("img").src = picture.large;    
+    document.getElementById("name") = `${first} ${last}`;
+    document.getElementById("email") = email;
+    document.getElementById("city") = `${city}`;
+    document.getElementById("cell") = cell;
+    document.getElementById("address") = `${country}`;
+    document.getElementById("dob") = `${date}`;
+
+}
+
 galleryDiv.addEventListener("click", (e)=>{
         const target = e.target.closest(".card");
         const index = target.getAttribute("data-index");  
         employee = employees[index];        
         //console.log(index);
         console.log(employee);             
-        displayModal();
-        
-        
+        displayModal();       
     });
+
+
+const prevModal = document.getElementById("modal-prev");
+const modalIndex = parseInt(modalContainer.getAttribute("data-index"));
+console.log(modalIndex);
+
+prevModal.addEventListener("click", (e)=>{    
+    if (modalIndex === 0) {
+        createModal(11);                    
+    }else{
+        createModal(modalIndex - 1);        
+    }
+});
+
+
+
+
+const nextModal = document.getElementById("modal-next");
+
+
+
+
