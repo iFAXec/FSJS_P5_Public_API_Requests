@@ -125,7 +125,7 @@ const closeModal = document.getElementById("modal-close-btn");
 
 function changeModal(index){
     const {picture: {large}, name: {first, last}, email, cell, dob: {date}, location: {city, state, country, postcode}} = employees[index];
-    //modalContainer.setAttribute("data-index", index);
+    modalContainer.setAttribute("data-index", index);
     
 
     document.getElementById("img").src = picture.large;    
@@ -161,8 +161,6 @@ prevModal.addEventListener("click", (e)=>{
         createModal(modalIndex - 1);        
     }
 });
-
-
 
 
 const nextModal = document.getElementById("modal-next");
