@@ -50,7 +50,7 @@ fetch(url)
 
     function createModal() {
         const htmlModal = `
-             <div class="modal-container data-index="" style = "display:none">
+             <div class="modal-container" data-index="" style = "display:none">
                 <div class="modal">
                     <button type="button" id="modal-close-btn" class="modal-close-btn"><strong>X</strong></button>
                     <div class="modal-info-container">
@@ -118,13 +118,15 @@ const closeModal = document.getElementById("modal-close-btn");
     modalContainer.style.display = "block";   
     generateModal()    
 }
-  console.log(modalContainer);
+  
+
 
 
 
 function changeModal(index){
     const {picture: {large}, name: {first, last}, email, cell, dob: {date}, location: {city, state, country, postcode}} = employees[index];
-    modalContainer.setAttribute("data-index", index);
+    //modalContainer.setAttribute("data-index", index);
+    
 
     document.getElementById("img").src = picture.large;    
     document.getElementById("name") = `${first} ${last}`;
@@ -146,7 +148,9 @@ galleryDiv.addEventListener("click", (e)=>{
     });
 
 
+console.log(modalContainer);
 const prevModal = document.getElementById("modal-prev");
+console.log(modalContainer.getAttribute("data-index"));
 const modalIndex = parseInt(modalContainer.getAttribute("data-index"));
 console.log(modalIndex);
 
