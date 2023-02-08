@@ -138,6 +138,8 @@ function changeModal(index){
 
 }
 
+changeModal();
+
 galleryDiv.addEventListener("click", (e)=>{
         const target = e.target.closest(".card");
         const index = target.getAttribute("data-index");  
@@ -148,18 +150,13 @@ galleryDiv.addEventListener("click", (e)=>{
     });
 
 
-console.log(modalContainer);
+
 const prevModal = document.getElementById("modal-prev");
-console.log(modalContainer.getAttribute("data-index"));
 const modalIndex = parseInt(modalContainer.getAttribute("data-index"));
-console.log(modalIndex);
+
 
 prevModal.addEventListener("click", (e)=>{    
-    if (modalIndex === 0) {
-        createModal(11);                    
-    }else{
-        createModal(modalIndex - 1);        
-    }
+ 
 });
 
 
