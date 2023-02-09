@@ -21,7 +21,6 @@ fetch(url)
     }
     
 
-
     //Helper function which generate html within the card
     function displayCard(item, index) {
             const img = item.picture.large;
@@ -31,7 +30,7 @@ fetch(url)
             const state = item.location.state;          
 
             const html = `
-            <div class="card" data-index=${index}> 
+            <div class="card" data-index=${index} data-first=${item.name.first.toLowerCase()} data-last=${item.name.last.toLowerCase()}> 
             <div class="card-img-container">
                 <img class="card-img" src= ${img} alt = profile picture of ${name.first} ${name.last}>
             </div>
@@ -119,7 +118,45 @@ const closeModal = document.getElementById("modal-close-btn");
     generateModal()    
     
 }
-  
+
+galleryDiv.addEventListener("click", (e)=>{
+    const target = e.target.closest(".card");
+    const index = target.getAttribute("data-index");  
+    employee = employees[index];        
+    //console.log(index);
+    console.log(employee);             
+    displayModal();       
+});
+
+
+
+//<----Search Functionality ---->
+
+const searchContainer = document.querySelector(".search-container");
+const searchSubmit = document.getElementById("search-submit");
+
+function searchHTML() {
+    let html = "";
+    html = `
+        <form action="#" method="get">
+        <input type="search" id="search-input" class="search-input" placeholder="Search...">
+        <input type="submit" value="&#x1F50D;" id="search-submit" class="search-submit">
+        </form>   
+    `;    
+    searchContainer.insertAdjacentHTML("beforeend", html)
+    return html;
+}
+
+let searchBar = searchHTML();    
+
+console.log(searchBar);
+console.log(searchSubmit);
+
+searchBar.addEventListener("keyup", (e)=>{
+    
+});
+
+
 // function changeModal(index){
 //     const {picture: {large}, name: {first, last}, email, cell, dob: {date}, location: {city, state, country, postcode}} = employees[index];
 //     modalContainer.setAttribute("data-index", index);   
@@ -142,14 +179,7 @@ const closeModal = document.getElementById("modal-close-btn");
 //     changeModal(modalIndex); 
 // });
 
-galleryDiv.addEventListener("click", (e)=>{
-        const target = e.target.closest(".card");
-        const index = target.getAttribute("data-index");  
-        employee = employees[index];        
-        //console.log(index);
-        console.log(employee);             
-        displayModal();       
-    });
+
 
 
 
