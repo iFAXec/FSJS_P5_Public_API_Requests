@@ -133,7 +133,6 @@ const closeModal = document.getElementById("modal-close-btn");
 //     document.getElementById("dob") = `${date}`;
 // }
 
-
 // const prevModal = document.getElementById("modal-prev");
 // const nextModal = document.getElementById("modal-next");
 // let modalIndex;
