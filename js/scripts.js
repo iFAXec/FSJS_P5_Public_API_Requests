@@ -2,8 +2,6 @@ const url = "https://randomuser.me/api/?results=12&inc=picture,name,email,locati
 const galleryDiv = document.getElementById("gallery");
 let employees = [];
 
-
-
 fetch(url)
     .then(checkStatus)
     .then(response => response.json())              
@@ -30,7 +28,7 @@ fetch(url)
             const state = item.location.state;          
 
             const html = `
-            <div class="card" data-index=${index} data-first=${item.name.first.toLowerCase()} data-last=${item.name.last.toLowerCase()}> 
+            <div class="card" data-index=${index} data-first=${item.name.first.toLowerCase()} data-last=${item.name.last.toLowerCase()} > 
             <div class="card-img-container">
                 <img class="card-img" src= ${img} alt = profile picture of ${name.first} ${name.last}>
             </div>
@@ -49,7 +47,7 @@ fetch(url)
 
     function createModal() {
         const htmlModal = `
-             <div class="modal-container" data-index="" style = "display:none">
+             <div class="modal-container" data-index="" style = "display:none" >
                 <div class="modal">
                     <button type="button" id="modal-close-btn" class="modal-close-btn"><strong>X</strong></button>
                     <div class="modal-info-container">
@@ -115,7 +113,8 @@ const closeModal = document.getElementById("modal-close-btn");
 
     function displayModal(){   
     modalContainer.style.display = "block";   
-    generateModal()    
+    modalContainer.style.backgroundColor="#EDF2E6";
+    generateModal();    
     
 }
 
@@ -129,11 +128,9 @@ galleryDiv.addEventListener("click", (e)=>{
 });
 
 
-
 //<----Search Functionality ---->
 
 const searchContainer = document.querySelector(".search-container");
-const searchSubmit = document.querySelector("search-submit");
 
 function searchHTML() {
     let html = "";
@@ -147,30 +144,28 @@ function searchHTML() {
     return html;
 }
 
-let searchBar = searchHTML();    
-
-console.log(searchBar);
-console.log(searchSubmit);
+let searchBar = searchHTML();
+//console.log(searchBar);
 
 searchContainer.addEventListener("keyup", searchCardName);
+document.getElementById("search-submit").addEventListener("click", searchCardName);
 
 function searchCardName() {
        const searchInput = document.querySelector("#search-input");
         const searchValue = searchInput.value.toLowerCase();   
-        const employeeCardsContainers = document.querySelectorAll(".card");
+        const employeeCardsContainers = document.querySelectorAll(".card");            
         for (const employeeCard of employeeCardsContainers) {
             const firstName = employeeCard.getAttribute("data-first");
             const lastName = employeeCard.getAttribute("data-last");
-
             if (firstName.includes(searchValue) || lastName.includes(searchValue)) {
-                employeeCard.style.display = "block"                
+                employeeCard.style.display = "flex";                                
             } else {
-                employeeCard.style.display = "none"                
-            }            
+                employeeCard.style.display = "none";  
+                
+            }
+                    
         }    
 }
-
-
 
 // function changeModal(index){
 //     const {picture: {large}, name: {first, last}, email, cell, dob: {date}, location: {city, state, country, postcode}} = employees[index];
@@ -193,11 +188,3 @@ function searchCardName() {
 //     //console.log(modalIndex);
 //     changeModal(modalIndex); 
 // });
-
-
-
-
-
-
-
-
