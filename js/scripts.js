@@ -133,7 +133,7 @@ galleryDiv.addEventListener("click", (e)=>{
 //<----Search Functionality ---->
 
 const searchContainer = document.querySelector(".search-container");
-const searchSubmit = document.getElementById("search-submit");
+const searchSubmit = document.querySelector("search-submit");
 
 function searchHTML() {
     let html = "";
@@ -152,9 +152,24 @@ let searchBar = searchHTML();
 console.log(searchBar);
 console.log(searchSubmit);
 
-searchBar.addEventListener("keyup", (e)=>{
-    
-});
+searchContainer.addEventListener("keyup", searchCardName);
+
+function searchCardName() {
+       const searchInput = document.querySelector("#search-input");
+        const searchValue = searchInput.value.toLowerCase();   
+        const employeeCardsContainers = document.querySelectorAll(".card");
+        for (const employeeCard of employeeCardsContainers) {
+            const firstName = employeeCard.getAttribute("data-first");
+            const lastName = employeeCard.getAttribute("data-last");
+
+            if (firstName.includes(searchValue) || lastName.includes(searchValue)) {
+                employeeCard.style.display = "block"                
+            } else {
+                employeeCard.style.display = "none"                
+            }            
+        }    
+}
+
 
 
 // function changeModal(index){
