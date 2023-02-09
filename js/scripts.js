@@ -117,28 +117,31 @@ const closeModal = document.getElementById("modal-close-btn");
     function displayModal(){   
     modalContainer.style.display = "block";   
     generateModal()    
+    
 }
   
+// function changeModal(index){
+//     const {picture: {large}, name: {first, last}, email, cell, dob: {date}, location: {city, state, country, postcode}} = employees[index];
+//     modalContainer.setAttribute("data-index", index);   
+
+//     document.getElementById("img").src = picture.large;    
+//     document.getElementById("name") = `${first} ${last}`;
+//     document.getElementById("email") = email;
+//     document.getElementById("city") = `${city}`;
+//     document.getElementById("cell") = cell;
+//     document.getElementById("address") = `${country}`;
+//     document.getElementById("dob") = `${date}`;
+// }
 
 
-
-
-function changeModal(index){
-    const {picture: {large}, name: {first, last}, email, cell, dob: {date}, location: {city, state, country, postcode}} = employees[index];
-    modalContainer.setAttribute("data-index", index);
-    
-
-    document.getElementById("img").src = picture.large;    
-    document.getElementById("name") = `${first} ${last}`;
-    document.getElementById("email") = email;
-    document.getElementById("city") = `${city}`;
-    document.getElementById("cell") = cell;
-    document.getElementById("address") = `${country}`;
-    document.getElementById("dob") = `${date}`;
-
-}
-
-changeModal();
+// const prevModal = document.getElementById("modal-prev");
+// const nextModal = document.getElementById("modal-next");
+// let modalIndex;
+// prevModal.addEventListener("click", (e)=>{     
+//     modalIndex = parseInt(getAttribute("data-index"));
+//     //console.log(modalIndex);
+//     changeModal(modalIndex); 
+// });
 
 galleryDiv.addEventListener("click", (e)=>{
         const target = e.target.closest(".card");
@@ -150,17 +153,6 @@ galleryDiv.addEventListener("click", (e)=>{
     });
 
 
-
-const prevModal = document.getElementById("modal-prev");
-const modalIndex = parseInt(modalContainer.getAttribute("data-index"));
-
-
-prevModal.addEventListener("click", (e)=>{    
- 
-});
-
-
-const nextModal = document.getElementById("modal-next");
 
 
 
