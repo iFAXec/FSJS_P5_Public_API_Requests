@@ -2,6 +2,14 @@ const url = "https://randomuser.me/api/?results=12&inc=picture,name,email,locati
 const galleryDiv = document.getElementById("gallery");
 let employees = [];
 
+
+/*  
+* fetch data of 12 employees using the url
+* Data  to fetch are Image, First and Last Name, Email and City oo location
+* check status 
+* parse the response and map over the data to dislay the employee card
+*/
+
 fetch(url)
     .then(checkStatus)
     .then(response => response.json())              
@@ -10,7 +18,14 @@ fetch(url)
         console.log(employees);
         employees.map((item, index) => displayCard(item, index));
     })    
-    //.catch(error => console.error("Error:", error))
+    .catch(error => console.error("Error:", error))
+
+/**
+ * The function checks the response received using the fetch command
+ * @param {response} response 
+ * Check if he respose is ok
+ * @returns response
+ */
 
     function checkStatus(response) {
         if (response && response.ok) {
@@ -18,6 +33,12 @@ fetch(url)
         } 
     }
     
+    /**
+     * Create a helper function which takes two para
+     * @param {property} item is employee property in the object
+     * @param {index} index of the employee
+     * Creates the html elements using template literals
+     */
 
     //Helper function which generate html within the card
     function displayCard(item, index) {
@@ -45,6 +66,11 @@ fetch(url)
     }
 
 
+
+/**
+ * Helper function which create a html template of the modal
+ * Appends the html to the DOM 
+ */    
     function createModal() {
         const htmlModal = `
              <div class="modal-container" data-index="" style = "display:none" >
@@ -72,6 +98,11 @@ fetch(url)
     }
 
     createModal();
+
+/**
+ * Function to generate the modal which a card is clicked
+ * and attaches to each element in of the DOM to create the modal
+ */
 
 function generateModal (){
     const modalImg = document.querySelector(".modal-img");
@@ -104,6 +135,9 @@ function generateModal (){
 
 }
 
+/**
+ * Event listen to close the modal when "x" is clicked
+ */
 const modalContainer = document.querySelector(".modal-container");
 const closeModal = document.getElementById("modal-close-btn");
 
@@ -111,12 +145,22 @@ const closeModal = document.getElementById("modal-close-btn");
     modalContainer.style.display = "none";    
   });    
 
+/**
+ * Helper function to dislay the modal
+ */
+
     function displayModal(){   
     modalContainer.style.display = "block";   
     modalContainer.style.backgroundColor="#EDF2E6";
     generateModal();    
     
 }
+
+/**
+ * Event listener to display the modal when the card is clicked
+ * Event delegation to target the card
+ * Obtain index value and display the modal 
+ */
 
 galleryDiv.addEventListener("click", (e)=>{
     const target = e.target.closest(".card");
@@ -131,6 +175,12 @@ galleryDiv.addEventListener("click", (e)=>{
 //<----Search Functionality ---->
 
 const searchContainer = document.querySelector(".search-container");
+
+/**
+ * Function creates html elements for search 
+ * Appends to the DOM
+ * @returns the html
+ */
 
 function searchHTML() {
     let html = "";
@@ -147,9 +197,17 @@ function searchHTML() {
 let searchBar = searchHTML();
 //console.log(searchBar);
 
+/** 
+ * Event listener to check the employee name
+ * Sorts the card as the name is typed
+ */
 searchContainer.addEventListener("keyup", searchCardName);
 document.getElementById("search-submit").addEventListener("click", searchCardName);
 
+/**
+ * Helper function to check the name entered in the search box matches with that of the card
+ * Sorts and displays the card of the employee with matching name
+ */
 function searchCardName() {
        const searchInput = document.querySelector("#search-input");
         const searchValue = searchInput.value.toLowerCase();   
