@@ -225,6 +225,7 @@ function searchCardName() {
         }    
 }
 
+//<-----Change the modal when prev and next button is clicked----->
 // function changeModal(index){
 //     const {picture: {large}, name: {first, last}, email, cell, dob: {date}, location: {city, state, country, postcode}} = employees[index];
 //     modalContainer.setAttribute("data-index", index);   
